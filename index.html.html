@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nicolás Esteban Morales Ocampo — Portafolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0f1f;
+    --bg-soft: #0e1428;
+    --panel: #131a33;
+    --panel-alt: #171f3f;
+    --hairline: #2a3158;
+    --text: #e7ecfb;
+    --text-muted: #97a0c3;
+    --text-dim: #6b7398;
+    --accent: #4fd1c5;
+    --accent-soft: rgba(79,209,197,0.12);
+    --gold: #f2b84b;
+    --gold-soft: rgba(242,184,75,0.12);
+    --radius: 10px;
+    --font-display: 'IBM Plex Mono', 'Courier New', monospace;
+    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --maxw: 1040px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(79,209,197,0.08), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(242,184,75,0.06), transparent 60%);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position: sticky; top:0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(11,15,31,0.75);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .nav-inner{
+    max-width: var(--maxw); margin:0 auto; padding: 14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .nav-brand{
+    font-family: var(--font-display); font-weight:600; font-size: 14px;
+    color: var(--text); letter-spacing: 0.02em;
+  }
+  .nav-brand span{ color: var(--accent); }
+  .nav-links{ display:flex; gap: 22px; list-style:none; margin:0; padding:0; flex-wrap: wrap; }
+  .nav-links a{
+    color: var(--text-muted); font-size: 13px; font-weight:500;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .nav-links a:hover{ color: var(--accent); text-decoration:none; }
+  .nav-cta{
+    font-family: var(--font-display); font-size: 12px; font-weight:600;
+    color: var(--bg); background: var(--accent);
+    padding: 8px 14px; border-radius: 6px; white-space: nowrap;
+    border: none; cursor: pointer; appearance: none;
+  }
+  .nav-cta:hover{ text-decoration:none; filter: brightness(1.08); }
+
+  .contact-menu{ position: relative; }
+  .contact-dropdown{
+    position: absolute; top: calc(100% + 8px); right: 0;
+    background: var(--panel); border: 1px solid var(--hairline); border-radius: 8px;
+    min-width: 175px; padding: 6px; display: none; flex-direction: column; gap: 2px;
+    box-shadow: 0 16px 34px -12px rgba(0,0,0,0.6); z-index: 60;
+  }
+  .contact-dropdown.open{ display: flex; }
+  .contact-dropdown a{
+    color: var(--text); font-family: var(--font-body); font-size: 13.5px;
+    padding: 9px 11px; border-radius: 6px; display: flex; align-items: center; gap: 9px;
+  }
+  .contact-dropdown a:hover{ background: var(--accent-soft); color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 640px){
+    .nav-links{ order: 3; width: 100%; justify-content:center; gap: 14px; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding: 76px 0 64px; }
+  .eyebrow{
+    font-family: var(--font-display); color: var(--accent); font-size: 13px;
+    letter-spacing: 0.16em; text-transform: uppercase; margin: 0 0 18px;
+    display:flex; align-items:center; gap: 10px;
+  }
+  .eyebrow::before{ content:""; width: 26px; height:1px; background: var(--accent); display:inline-block; }
+
+  h1{
+    font-family: var(--font-display); font-weight:700;
+    font-size: clamp(28px, 5vw, 44px); line-height:1.15; margin: 0 0 14px; letter-spacing: -0.01em;
+  }
+  .hero-sub{
+    color: var(--text-muted); font-size: 17px; max-width: 560px; margin: 0 0 34px;
+  }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom: 52px; }
+  .btn{
+    font-family: var(--font-display); font-size: 13px; font-weight:600;
+    padding: 11px 20px; border-radius: 6px; border: 1px solid var(--hairline);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{ background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .btn-primary:hover{ filter: brightness(1.08); text-decoration:none; }
+  .btn-ghost{ color: var(--text); }
+  .btn-ghost:hover{ border-color: var(--accent); color: var(--accent); text-decoration:none; }
+
+  /* ---------- TERMINAL (signature element) ---------- */
+  .terminal{
+    background: var(--panel);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    max-width: 640px;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
+    overflow:hidden;
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 14px; border-bottom: 1px solid var(--hairline);
+    background: var(--panel-alt);
+  }
+  .dot{ width:9px; height:9px; border-radius:50%; }
+  .dot.red{ background:#ef6a5f; } .dot.yellow{ background:#f5bf4f; } .dot.green{ background:#61c454; }
+  .terminal-title{ margin-left: 8px; font-family: var(--font-display); font-size: 11px; color: var(--text-dim); }
+  .terminal-body{ padding: 20px 18px; font-family: var(--font-display); font-size: 13.5px; }
+  .term-line{ color: var(--text-dim); margin-bottom: 6px; }
+  .term-query{ color: var(--text); }
+  .term-query .kw{ color: var(--accent); }
+  .cursor{ display:inline-block; width:7px; height:15px; background: var(--accent); margin-left:2px; vertical-align:-2px; animation: blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .result{ margin-top: 16px; opacity:0; transform: translateY(6px); transition: opacity .5s ease, transform .5s ease; }
+  .result.show{ opacity:1; transform: translateY(0); }
+  .result-label{ color: var(--text-dim); font-size: 11px; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px; }
+  .result-row{ display:grid; grid-template-columns: 110px 1fr; gap: 14px; padding: 7px 0; border-top: 1px solid var(--hairline); font-size: 13px; }
+  .result-row:first-of-type{ border-top: none; }
+  .result-key{ color: var(--gold); }
+  .result-val{ color: var(--text); }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding: 64px 0; border-top: 1px solid var(--hairline); }
+  .section-head{ display:flex; align-items:baseline; gap:16px; margin-bottom: 34px; flex-wrap:wrap; }
+  .section-num{ font-family: var(--font-display); color: var(--text-dim); font-size: 13px; }
+  .section-title{ font-family: var(--font-display); font-size: 22px; font-weight:600; margin:0; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items:start; }
+  .about-text p{ color: var(--text-muted); font-size: 15.5px; margin: 0 0 16px; max-width: 620px; }
+  .stat-list{ display:flex; flex-direction:column; gap:0; border: 1px solid var(--hairline); border-radius: var(--radius); overflow:hidden; }
+  .stat{ padding: 16px 18px; border-bottom: 1px solid var(--hairline); background: var(--panel); }
+  .stat:last-child{ border-bottom:none; }
+  .stat-num{ font-family: var(--font-display); color: var(--accent); font-size: 22px; font-weight:700; }
+  .stat-label{ color: var(--text-muted); font-size: 12.5px; margin-top:2px; }
+  @media (max-width: 760px){ .about-grid{ grid-template-columns: 1fr; } }
+
+  /* ---------- SKILLS ---------- */
+  .skill-block{ margin-bottom: 26px; }
+  .skill-block:last-child{ margin-bottom:0; }
+  .skill-block-title{ font-family: var(--font-display); font-size: 12px; color: var(--text-dim); text-transform:uppercase; letter-spacing:0.1em; margin: 0 0 12px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:9px; }
+  .tag{
+    font-size: 13px; padding: 7px 13px; border-radius: 999px;
+    border: 1px solid var(--hairline); color: var(--text-muted); background: var(--panel);
+  }
+  .tag.accent{ border-color: rgba(79,209,197,0.35); color: var(--accent); background: var(--accent-soft); }
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{ position:relative; padding-left: 28px; }
+  .timeline::before{ content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background: var(--hairline); }
+  .tl-item{ position:relative; padding-bottom: 34px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-dot{ position:absolute; left: -28px; top:5px; width:11px; height:11px; border-radius:50%; background: var(--bg); border: 2px solid var(--accent); }
+  .tl-role{ font-weight:600; font-size: 16px; margin:0 0 2px; }
+  .tl-meta{ font-family: var(--font-display); font-size: 12px; color: var(--text-dim); margin-bottom: 10px; }
+  .tl-desc{ color: var(--text-muted); font-size: 14.5px; max-width: 620px; }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 760px){ .projects-grid{ grid-template-columns: 1fr; } }
+  .card{ background: var(--panel); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 22px; }
+  .card-status{
+    display:inline-block; font-family: var(--font-display); font-size: 11px; font-weight:600;
+    color: var(--gold); background: var(--gold-soft); border: 1px solid rgba(242,184,75,0.35);
+    padding: 4px 10px; border-radius: 999px; margin-bottom: 14px;
+  }
+  .card-title{ font-size: 16px; font-weight:600; margin: 0 0 8px; }
+  .card-desc{ color: var(--text-muted); font-size: 14px; margin: 0 0 14px; }
+  .card-tags{ display:flex; gap:8px; flex-wrap:wrap; }
+  .card-tags .tag{ font-size: 11.5px; padding: 4px 10px; }
+
+  .card-empty{
+    border: 1px dashed var(--hairline); background: transparent;
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    min-height: 100%;
+  }
+  .card-empty .card-title{ color: var(--text-muted); }
+  .card-empty .card-desc{ color: var(--text-dim); }
+  .card-empty-cta{ font-family: var(--font-display); font-size: 12px; color: var(--accent); }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-list{ display:flex; flex-direction:column; gap: 0; margin-bottom: 32px; }
+  .edu-item{ display:flex; justify-content:space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--hairline); flex-wrap:wrap; }
+  .edu-item:last-child{ border-bottom:none; }
+  .edu-main .edu-degree{ font-weight:600; font-size: 14.5px; }
+  .edu-main .edu-school{ color: var(--text-muted); font-size: 13.5px; }
+  .edu-when{ font-family: var(--font-display); font-size: 12px; color: var(--text-dim); white-space:nowrap; }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact{ text-align:center; }
+  .contact h2{ font-family: var(--font-display); font-size: 26px; margin: 0 0 14px; }
+  .contact p{ color: var(--text-muted); max-width: 480px; margin: 0 auto 30px; }
+  .contact-links{ display:flex; justify-content:center; gap: 26px; flex-wrap:wrap; margin-bottom: 40px; }
+  .contact-links a{ color: var(--text); font-size: 14px; }
+  .contact-links a:hover{ color: var(--accent); }
+  footer{ text-align:center; padding: 26px 0 50px; color: var(--text-dim); font-size: 12.5px; font-family: var(--font-display); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">nicolas<span>.morales</span></div>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#formacion">Formación</a></li>
+    </ul>
+    <div class="contact-menu">
+      <button class="nav-cta" id="contactBtn" aria-haspopup="true" aria-expanded="false">Contáctame</button>
+      <div class="contact-dropdown" id="contactDropdown">
+        <a href="tel:+573028496410">📞 Llamar</a>
+        <a href="mailto:estebanocampo1021@gmail.com">✉️ Correo</a>
+        <a href="https://wa.me/573028496410" target="_blank" rel="noopener">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<header class="hero wrap">
+  <p class="eyebrow">PERFIL // DATOS</p>
+  <h1>Nicolás Esteban Morales Ocampo</h1>
+  <p class="hero-sub">Construyendo mi camino de soporte técnico y desarrollo web hacia el análisis y la ingeniería de datos.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="./CV_Nicolas_Morales_Ocampo.pdf">Descargar CV</a>
+    <a class="btn btn-ghost" href="mailto:estebanocampo1021@gmail.com">Escríbeme</a>
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      <span class="terminal-title">consulta_perfil.sql</span>
+    </div>
+    <div class="terminal-body">
+      <div class="term-line">$ psql -f consulta_perfil.sql</div>
+      <div class="term-query" id="typedQuery"></div>
+      <div class="result" id="result">
+        <div class="result-label">// resultado</div>
+        <div class="result-row"><span class="result-key">nombre</span><span class="result-val">Nicolás Esteban Morales Ocampo</span></div>
+        <div class="result-row"><span class="result-key">enfoque</span><span class="result-val">Análisis e Ingeniería de Datos</span></div>
+        <div class="result-row"><span class="result-key">ubicacion</span><span class="result-val">Bogotá, Colombia</span></div>
+        <div class="result-row"><span class="result-key">estado</span><span class="result-val">Disponible para nuevas oportunidades</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="sobre-mi">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Sobre mí</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Estoy formándome en Ingeniería de Sistemas (CUN) y Ciencia de Datos (Universidad de La Salle), con cerca de 2 años de experiencia en soporte técnico, administración de entornos Microsoft 365/Intune y desarrollo web front-end.</p>
+        <p>Combino una base sólida en resolución de problemas y pensamiento analítico con formación especializada en visualización de datos, ética del dato y prompt engineering. Estoy en un proceso activo de especialización hacia el análisis y la ingeniería de datos, aprendiendo de forma autodidacta y aplicando lo que voy construyendo en proyectos propios.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat"><div class="stat-num">~2 años</div><div class="stat-label">Experiencia en soporte técnico y desarrollo</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Carreras universitarias en curso</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Cursos y certificaciones completadas</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="habilidades">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Habilidades</h2>
+    </div>
+
+    <div class="skill-block">
+      <p class="skill-block-title">Fortalezas</p>
+      <div class="tags">
+        <span class="tag">Pensamiento analítico</span>
+        <span class="tag">Resolución de problemas</span>
+        <span class="tag">Aprendizaje autónomo</span>
+        <span class="tag">Atención al detalle</span>
+        <span class="tag">Comunicación efectiva</span>
+        <span class="tag">Trabajo en equipo ágil</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <p class="skill-block-title">Stack técnico</p>
+      <div class="tags">
+        <span class="tag accent">Visualización de datos</span>
+        <span class="tag accent">Prompt Engineering</span>
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">VSCode</span>
+        <span class="tag">Windows</span>
+        <span class="tag">Linux (básico)</span>
+        <span class="tag">Microsoft 365 / Intune</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Experiencia</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-dot"></span>
+        <p class="tl-role">Soporte Técnico — Concentrix</p>
+        <p class="tl-meta">Bogotá, Colombia · Enero 2024 – Diciembre 2025</p>
+        <p class="tl-desc">Soporte remoto de primer nivel resolviendo incidencias de hardware, software y red, con un promedio de 60 tickets semanales. Instalación y configuración de sistemas operativos y herramientas de Microsoft 365 e Intune.</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-dot"></span>
+        <p class="tl-role">Desarrollador Web Front-End — Akronym CR</p>
+        <p class="tl-meta">Remoto · Junio 2023 – Diciembre 2023</p>
+        <p class="tl-desc">Diseño de interfaces web responsivas con HTML5, CSS3 y JavaScript. Implementación de aplicaciones con Next.js, colaborando en sesiones ágiles y en la mejora de la arquitectura front-end.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Proyectos</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="card">
+        <span class="card-status">En construcción 🚧</span>
+        <p class="card-title">SismoAlert AI</p>
+        <p class="card-desc">Prototipo en diseño: un pipeline que consume la API pública de terremotos del USGS para detectar actividad sísmica reciente y generar alertas automáticas.</p>
+        <div class="card-tags">
+          <span class="tag">Python</span>
+          <span class="tag">API pública</span>
+          <span class="tag">Automatización</span>
+        </div>
+      </div>
+      <div class="card card-empty">
+        <p class="card-title">+ Tu próximo proyecto</p>
+        <span class="card-empty-cta">→ empieza esta semana</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="formacion">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Formación académica</h2>
+    </div>
+
+    <div class="edu-list">
+      <div class="edu-item">
+        <div class="edu-main"><div class="edu-degree">Ciencia de Datos</div><div class="edu-school">Universidad de La Salle · Bogotá, Colombia</div></div>
+        <div class="edu-when">En curso (1er semestre)</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-main"><div class="edu-degree">Ingeniería de Sistemas</div><div class="edu-school">CUN · Bogotá, Colombia</div></div>
+        <div class="edu-when">En curso (6° semestre)</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-main"><div class="edu-degree">Técnico en Sistemas</div><div class="edu-school">CUN · Bogotá, Colombia</div></div>
+        <div class="edu-when">2023</div>
+      </div>
+    </div>
+
+    <p class="skill-block-title">Certificaciones y cursos</p>
+    <div class="tags">
+      <span class="tag">Análisis y Visualización de Datos — Talento Tech</span>
+      <span class="tag">Ética y Manejo de Datos — Talento Tech</span>
+      <span class="tag">Prompt Engineering con ChatGPT — OpenAI Academy</span>
+      <span class="tag">Especialista en Soporte IT — LinkedIn Learning</span>
+      <span class="tag">Programación y Desarrollo Web — Talento Tech</span>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="wrap">
+    <h2>¿Buscas construir algo con datos?</h2>
+    <p>Estoy en búsqueda activa de oportunidades como analista o ingeniero de datos junior. Hablemos.</p>
+    <div class="contact-links">
+      <a href="mailto:estebanocampo1021@gmail.com">estebanocampo1021@gmail.com</a>
+      <a href="tel:+573028496410">+57 302 849 6410</a>
+      <a href="https://wa.me/573028496410" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.linkedin.com/in/nicolas-morales-b60605348" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#" title="Reemplaza con tu URL real de GitHub">GitHub</a>
+      <a href="./CV_Nicolas_Morales_Ocampo.pdf">Descargar CV</a>
+    </div>
+  </div>
+</section>
+
+<footer>hecho por Nicolás — HTML, CSS &amp; JavaScript</footer>
+
+<script>
+  (function(){
+    var btn = document.getElementById('contactBtn');
+    var menu = document.getElementById('contactDropdown');
+
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if (!menu.contains(e.target) && e.target !== btn) {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  })();
+
+  (function(){
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var query = "SELECT nombre, enfoque, ubicacion, estado FROM perfil;";
+    var el = document.getElementById('typedQuery');
+    var result = document.getElementById('result');
+
+    function showResult(){ result.classList.add('show'); }
+
+    if (reduce) {
+      el.innerHTML = query.replace('SELECT', '<span class="kw">SELECT</span>').replace('FROM', '<span class="kw">FROM</span>');
+      showResult();
+      return;
+    }
+
+    var i = 0;
+    el.innerHTML = '<span class="cursor"></span>';
+    function type(){
+      if (i <= query.length) {
+        var shown = query.slice(0, i)
+          .replace('SELECT', '<span class="kw">SELECT</span>');
+        el.innerHTML = shown + '<span class="cursor"></span>';
+        i++;
+        setTimeout(type, 22);
+      } else {
+        el.innerHTML = query.replace('SELECT', '<span class="kw">SELECT</span>').replace('FROM', '<span class="kw">FROM</span>');
+        setTimeout(showResult, 250);
+      }
+    }
+    setTimeout(type, 500);
+  })();
+</script>
+
+</body>
+</html>
